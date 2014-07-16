@@ -137,14 +137,14 @@ namespace DebtGroup.Controllers
 			else if (countNegs == 2) 
 			{
 				if (negativeLocs [0].ToString() == "p") {
-					outString += "Dustin owes Ryan $" + values [1] * -1 + "<br />";
-					outString += "Dustin owes Cassie $" + values [2] * -1 + "<br />";
+					outString += "Dustin owes Ryan $" + values [1] + "<br />";
+					outString += "Dustin owes Cassie $" + values [2] + "<br />";
 				} else if (negativeLocs [1].ToString() == "p") {
-					outString += "Ryan owes Dustin $" + values [0] * -1 + "<br />";
-					outString += "Ryan owes Cassie $" + values [2] * -1 + "<br />";
+					outString += "Ryan owes Dustin $" + values [0] + "<br />";
+					outString += "Ryan owes Cassie $" + values [2] + "<br />";
 				} else if (negativeLocs [2].ToString() == "p") {
-					outString += "Cassie owes Dustin $" + values [0] * -1 + "<br />";
-					outString += "Cassie owes Ryan $" + values [1] * -1 + "<br />";
+					outString += "Cassie owes Dustin $" + values [0] + "<br />";
+					outString += "Cassie owes Ryan $" + values [1] + "<br />";
 				}
 			}
 			return outString;
