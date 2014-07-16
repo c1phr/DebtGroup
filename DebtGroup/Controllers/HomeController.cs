@@ -49,6 +49,18 @@ namespace DebtGroup.Controllers
 
 		public ActionResult oauth2callback()
 		{
+			string qs = Request.QueryString ["code"];
+			OAuth2Parameters parameters = HttpContext.Application ["GoogleAuthParams"] as OAuth2Parameters;
+			parameters.AccessCode = qs.Substring(qs.IndexOf("/"));
+			GOAuth2RequestFactory requestFactory = new GOAuth2RequestFactory (null, "MySpreadsheetIntegration-v1", parameters);
+			SpreadsheetsService service = new SpreadsheetsService ("MySpreadsheetIntegration-v1");
+			service.RequestFactory = requestFactory;
+			SpreadsheetQuery query = new SpreadsheetQuery ();
+			SpreadsheetFeed feed = service.Query (query);
+			foreach (SpreadsheetEntry entry in feed.Entries) 
+			{
+				ViewBag.Sheets += entry.Title.Text;
+			}
 			return View ();
 		}
 
