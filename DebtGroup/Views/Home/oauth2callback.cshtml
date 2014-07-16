@@ -18,7 +18,7 @@
 		// And send the token over to the server
 		var req = new XMLHttpRequest();
 		// consider using POST so query isn't logged
-		req.open('GET', 'http://' + window.location.host + '/SheetApp?token=' + queryString, true);
+		req.open('GET', 'http://' + window.location.host + '/Home/SheetApp?token=' + queryString, true);
 
 		req.onreadystatechange = function (e) {
 		  if (req.readyState == 4) {
