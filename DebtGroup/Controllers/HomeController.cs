@@ -47,7 +47,7 @@ namespace DebtGroup.Controllers
 			return Redirect (OAuthUrl);
 		}
 
-		public ActionResult oauth2callback()
+		public ActionResult oauth2callback(string code)
 		{
 			return View ();
 		}
