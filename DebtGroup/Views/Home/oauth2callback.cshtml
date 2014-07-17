@@ -1,18 +1,17 @@
 ﻿@{
-    Layout = null;
+    ViewBag.Title = DebtGroup;
 }
 
 <!DOCTYPE html>
 
-<html>
-<head>
-    <title>DebtGroup Login</title>
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
 
-</head>
-<body>
-    <div>
-    	<p>@Html.Raw(ViewBag.Message)</p>
-    </div>
-</body>
-</html>
+<article>
+    <p>
+        @Html.Raw(ViewBag.Message)
+    </p>
+        
+</article>
 
