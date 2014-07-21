@@ -35,7 +35,7 @@ namespace DebtGroup.Controllers
 		{
 			string ClientId = Environment.GetEnvironmentVariable("Google_Client_Id");
 			string ClientSecret = Environment.GetEnvironmentVariable ("Google_Client_Secret");
-			string Scope = "https://spreadsheets.google.com/feeds";
+			string Scope = "https://spreadsheets.google.com/feeds https://www.googleapis.com/auth/plus.me";
 			string RedirectUri = "http://debtgroup.azurewebsites.net/oauth2callback";
 			OAuth2Parameters parameters = new OAuth2Parameters();
 			parameters.ClientId = ClientId;
@@ -106,6 +106,7 @@ namespace DebtGroup.Controllers
 			OAuth2Parameters parameters = HttpContext.Application ["GoogleAuthParams"] as OAuth2Parameters;
 			parameters.AccessCode = token;
 			OAuthUtil.GetAccessToken (parameters);
+			
 			GOAuth2RequestFactory requestFactory = new GOAuth2RequestFactory (null, "MySpreadsheetIntegration-v1", parameters);
 			SpreadsheetsService service = new SpreadsheetsService ("MySpreadsheetIntegration-v1");
 			service.RequestFactory = requestFactory;
