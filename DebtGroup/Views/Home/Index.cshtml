@@ -4,11 +4,9 @@
 }
 @section featured {
     <section class="featured">  
-		<div class="row">
-			<div class="span6 offset3">
-	    		<p>Click the button below to go to the Debt Viewer</p>  	
-	        	@MvcHtmlString.Create(Html.ActionButton("Go to App", "DoAuth", "Home", "Home/DoAuth"))
-			</div>
-        </div>
+		<div class="flex-container">
+    		<p class="text-center">Click the button below to go to the Debt Viewer</p>
+        	@MvcHtmlString.Create(Html.ActionButton("Go to App", "DoAuth", "Home", "Home/DoAuth", "margin-center"))
+		</div>
     </section>
 }

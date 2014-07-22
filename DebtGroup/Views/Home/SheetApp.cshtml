@@ -1,17 +1,11 @@
-﻿@{
-    Layout = null;
+﻿@using DebtGroup.HtmlExtensions
+@{
+    ViewBag.Title = "DebtGroup";
 }
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-    <div>
-    	<p>@ViewBag.Sheets</p>
-    </div>
-</body>
-</html>
-
+@section featured {
+    <section class="featured">  
+		<div class="flex-container">
+    		@ViewBag.Sheets
+		</div>
+    </section>
+}
