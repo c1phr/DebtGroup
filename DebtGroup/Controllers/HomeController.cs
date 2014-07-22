@@ -29,7 +29,7 @@ namespace DebtGroup.Controllers
 		{
 			string ClientId = Environment.GetEnvironmentVariable("Google_Client_Id");
 			string ClientSecret = Environment.GetEnvironmentVariable ("Google_Client_Secret");
-			string Scope = "https://spreadsheets.google.com/feeds";
+			string Scope = "https://spreadsheets.google.com/feeds https://www.googleapis.com/auth/plus.me";
 			string RedirectUri = "http://debtgroup.azurewebsites.net/oauth2callback";
 			OAuth2Parameters parameters = new OAuth2Parameters();
 			parameters.ClientId = ClientId;
@@ -118,26 +118,26 @@ namespace DebtGroup.Controllers
 			string outString = "";
 			if (countNegs == 1) 
 			{
-				if (negativeLocs [0].ToString() == "n") {
+				if (negativeLocs [0].ToString() == "n") { //Dustin is getting money
 					outString += "Ryan owes Dustin $" + values [1] + "<br />";
 					outString += "Cassie owes Dustin $" + values [2] + "<br />";
-				} else if (negativeLocs [1].ToString() == "n") {
+				} else if (negativeLocs [1].ToString() == "n") { //Ryan is getting money
 					outString += "Dustin owes Ryan $" + values [0] + "<br />";
 					outString += "Cassie owes Ryan $" + values [2] + "<br />";
-				} else if (negativeLocs [2].ToString() == "n") {
+				} else if (negativeLocs [2].ToString() == "n") { //Cassie is getting money
 					outString += "Dustin owes Cassie $" + values [0] + "<br />";
 					outString += "Ryan owes Cassie $" + values [1] + "<br />";
 				}
 			}
 			else if (countNegs == 2) 
 			{
-				if (negativeLocs [0].ToString() == "p") {
+				if (negativeLocs [0].ToString() == "p") { //Dustin owes people
 					outString += "Dustin owes Ryan $" + values [1] * -1 + "<br />";
 					outString += "Dustin owes Cassie $" + values [2] * -1 + "<br />";
-				} else if (negativeLocs [1].ToString() == "p") {
+				} else if (negativeLocs [1].ToString() == "p") { //Ryan owes people
 					outString += "Ryan owes Dustin $" + values [0] * -1 + "<br />";
 					outString += "Ryan owes Cassie $" + values [2] * -1 + "<br />";
-				} else if (negativeLocs [2].ToString() == "p") {
+				} else if (negativeLocs [2].ToString() == "p") { //Cassie owes people
 					outString += "Cassie owes Dustin $" + values [0] * -1 + "<br />";
 					outString += "Cassie owes Ryan $" + values [1] * -1 + "<br />";
 				}
