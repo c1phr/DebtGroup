@@ -1,17 +1,10 @@
 ﻿@{
-    ViewBag.Title = DebtGroup;
+    ViewBag.Title = "DebtGroup";
 }
-
-<!DOCTYPE html>
-
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-</hgroup>
-
-<article>
-    <p>
-        @Html.Raw(ViewBag.Message)
-    </p>
-        
-</article>
-
+@section featured {
+    <section class="featured">  
+		<div class="flex-container">
+    		@Html.Raw(ViewBag.Message)
+		</div>
+    </section>
+}
