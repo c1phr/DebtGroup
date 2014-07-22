@@ -29,7 +29,7 @@ namespace DebtGroup.Controllers
 		{
 			string ClientId = Environment.GetEnvironmentVariable("Google_Client_Id");
 			string ClientSecret = Environment.GetEnvironmentVariable ("Google_Client_Secret");
-			string Scope = "https://spreadsheets.google.com/feeds https://www.googleapis.com/auth/plus.me";
+			string Scope = "https://spreadsheets.google.com/feeds";
 			string RedirectUri = "http://debtgroup.azurewebsites.net/oauth2callback";
 			OAuth2Parameters parameters = new OAuth2Parameters();
 			parameters.ClientId = ClientId;
