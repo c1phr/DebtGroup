@@ -181,11 +181,20 @@
     <Compile Include="Migrations\201410141558186_InitialCreate.Designer.cs">
       <DependentUpon>201410141558186_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410141634037_FullName.cs" />
+    <Compile Include="Migrations\201410141634037_FullName.Designer.cs">
+      <DependentUpon>201410141634037_FullName.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410141650435_PurchaserID.cs" />
+    <Compile Include="Migrations\201410141650435_PurchaserID.Designer.cs">
+      <DependentUpon>201410141650435_PurchaserID.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
+    <Compile Include="ViewModels\TransactionViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
@@ -254,6 +263,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201410141558186_InitialCreate.resx">
       <DependentUpon>201410141558186_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410141634037_FullName.resx">
+      <DependentUpon>201410141634037_FullName.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410141650435_PurchaserID.resx">
+      <DependentUpon>201410141650435_PurchaserID.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
