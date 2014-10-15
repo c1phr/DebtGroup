@@ -247,9 +247,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="packages.config" />
     <None Include="readme.txt" />
-    <Content Include="Views\Home\oauth2callback.cshtml" />
-    <Content Include="Views\Home\SheetApp.cshtml" />
-    <Content Include="Views\Home\DoAuth.cshtml" />
     <Content Include="Content\bootstrap-theme.css" />
     <None Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -266,7 +263,6 @@
     <Content Include="Views\Transactions\Details.cshtml" />
     <Content Include="Views\Transactions\Edit.cshtml" />
     <Content Include="Views\Transactions\Index.cshtml" />
-    <Content Include="Views\Home\UserInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
