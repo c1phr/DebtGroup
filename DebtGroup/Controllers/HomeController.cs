@@ -25,75 +25,83 @@ namespace DebtGroup.Controllers
             return View();
         }
 
-//        public ActionResult DoAuth()
-//        {
-//            string ClientId = Environment.GetEnvironmentVariable("Google_Client_Id");
-//            string ClientSecret = Environment.GetEnvironmentVariable ("Google_Client_Secret");
-//            string Scope = "https://spreadsheets.google.com/feeds https://www.googleapis.com/auth/plus.me";
-//            string RedirectUri = "http://debtgroup.azurewebsites.net/oauth2callback";
-//            OAuth2Parameters parameters = new OAuth2Parameters();
-//            parameters.ClientId = ClientId;
-//            parameters.ClientSecret = ClientSecret;
-//            parameters.Scope = Scope;
-//            parameters.RedirectUri = RedirectUri;
-//            string OAuthUrl = OAuthUtil.CreateOAuth2AuthorizationUrl (parameters);
-//            HttpContext.Application ["GoogleAuthParams"] = parameters;
-//            return Redirect (OAuthUrl);
-//        }
+        public ActionResult DoAuth()
+        {
+            string ClientId = Environment.GetEnvironmentVariable("Google_Client_Id");
+            string ClientSecret = Environment.GetEnvironmentVariable("Google_Client_Secret");
+            string Scope = "https://spreadsheets.google.com/feeds https://www.googleapis.com/auth/plus.me";
+            string RedirectUri = "http://debtgroup.azurewebsites.net/oauth2callback";
+            OAuth2Parameters parameters = new OAuth2Parameters();
+            parameters.ClientId = ClientId;
+            parameters.ClientSecret = ClientSecret;
+            parameters.Scope = Scope;
+            parameters.RedirectUri = RedirectUri;
+            string OAuthUrl = OAuthUtil.CreateOAuth2AuthorizationUrl(parameters);
+            HttpContext.Application["GoogleAuthParams"] = parameters;
+            return Redirect(OAuthUrl);
+        }
 
-//        public ActionResult oauth2callback()
-//        {
-//            string qs = Request.QueryString ["code"];
-//            OAuth2Parameters parameters = HttpContext.Application ["GoogleAuthParams"] as OAuth2Parameters;
-//            parameters.AccessCode = qs;
-//            OAuthUtil.GetAccessToken (parameters);
-//            GOAuth2RequestFactory requestFactory = new GOAuth2RequestFactory (null, "MySpreadsheetIntegration-v1", parameters);
-//            SpreadsheetsService service = new SpreadsheetsService ("MySpreadsheetIntegration-v1");
-//            service.RequestFactory = requestFactory;
-//            SpreadsheetQuery query = new SpreadsheetQuery ();
-//            SpreadsheetFeed feed = service.Query (query);
-//            int sheetIndex = 0;
-//            //This is probably inefficient, but having issues with Linq under Mono. Deal with it later.
-//            foreach (SpreadsheetEntry e in feed.Entries) {
-//                if (feed.Entries [sheetIndex].Title.Text == "Ryan Dustin Cassie Payments") {
-//                    break;
-//                } else {
-//                    sheetIndex++;
-//                }
-//            }
-//            if (sheetIndex >= feed.Entries.Count) {
-//                ViewBag.Message = "Could not find the required sheet in your Google Drive";
-//                return View ();
-//            }
-//            SpreadsheetEntry sheet = (SpreadsheetEntry)feed.Entries[sheetIndex];
-//            WorksheetFeed wsFeed = sheet.Worksheets;
-//            WorksheetEntry WrkSht = (WorksheetEntry)wsFeed.Entries[0];
-//            CellQuery cellQuery = new CellQuery (WrkSht.CellFeedLink);
-//            cellQuery.MinimumRow = 1;
-//            cellQuery.MaximumRow = 1;
-//            cellQuery.MinimumColumn = 1;
-//            cellQuery.MaximumColumn = 4;
-//            CellFeed cellFeed = service.Query (cellQuery);
-//            List<float> totalArray = new List<float>();
-//            int countNegs = 0;
-//            string negLocs = "";
-//            foreach (CellEntry cell in cellFeed.Entries) 
-//            {
-//                float val = float.Parse(cell.Value.ToString (), System.Globalization.CultureInfo.InvariantCulture);
-//                if (val < 0) {
-//                    countNegs++;
-//                    negLocs += "n";
-//                } else {
-//                    negLocs += "p";
-//                }
-//                totalArray.Add(val);
-//            }
-//            ViewBag.Message = ProcessSpreadsheetValues (totalArray, countNegs, negLocs);
-////			foreach (float st in totalArray) {
-////				ViewBag.Message += st.ToString(System.Globalization.CultureInfo.InvariantCulture);
-////			}
-//            return View ();
-//        }
+        public ActionResult oauth2callback()
+        {
+            string qs = Request.QueryString["code"];
+            OAuth2Parameters parameters = HttpContext.Application["GoogleAuthParams"] as OAuth2Parameters;
+            parameters.AccessCode = qs;
+            OAuthUtil.GetAccessToken(parameters);
+            //GOAuth2RequestFactory requestFactory = new GOAuth2RequestFactory(null, "MySpreadsheetIntegration-v1", parameters);
+            //SpreadsheetsService service = new SpreadsheetsService("MySpreadsheetIntegration-v1");
+            //service.RequestFactory = requestFactory;
+            //SpreadsheetQuery query = new SpreadsheetQuery();
+            //SpreadsheetFeed feed = service.Query(query);
+            //int sheetIndex = 0;
+            ////This is probably inefficient, but having issues with Linq under Mono. Deal with it later.
+            //foreach (SpreadsheetEntry e in feed.Entries)
+            //{
+            //    if (feed.Entries[sheetIndex].Title.Text == "Ryan Dustin Cassie Payments")
+            //    {
+            //        break;
+            //    }
+            //    else
+            //    {
+            //        sheetIndex++;
+            //    }
+            //}
+            //if (sheetIndex >= feed.Entries.Count)
+            //{
+            //    ViewBag.Message = "Could not find the required sheet in your Google Drive";
+            //    return View();
+            //}
+            //SpreadsheetEntry sheet = (SpreadsheetEntry)feed.Entries[sheetIndex];
+            //WorksheetFeed wsFeed = sheet.Worksheets;
+            //WorksheetEntry WrkSht = (WorksheetEntry)wsFeed.Entries[0];
+            //CellQuery cellQuery = new CellQuery(WrkSht.CellFeedLink);
+            //cellQuery.MinimumRow = 1;
+            //cellQuery.MaximumRow = 1;
+            //cellQuery.MinimumColumn = 1;
+            //cellQuery.MaximumColumn = 4;
+            //CellFeed cellFeed = service.Query(cellQuery);
+            //List<float> totalArray = new List<float>();
+            //int countNegs = 0;
+            //string negLocs = "";
+            //foreach (CellEntry cell in cellFeed.Entries)
+            //{
+            //    float val = float.Parse(cell.Value.ToString(), System.Globalization.CultureInfo.InvariantCulture);
+            //    if (val < 0)
+            //    {
+            //        countNegs++;
+            //        negLocs += "n";
+            //    }
+            //    else
+            //    {
+            //        negLocs += "p";
+            //    }
+            //    totalArray.Add(val);
+            //}
+            //ViewBag.Message = ProcessSpreadsheetValues(totalArray, countNegs, negLocs);
+            //			foreach (float st in totalArray) {
+            //				ViewBag.Message += st.ToString(System.Globalization.CultureInfo.InvariantCulture);
+            //			}
+            return View();
+        }
 
 //        public ActionResult SheetApp(string token)
 //        {
