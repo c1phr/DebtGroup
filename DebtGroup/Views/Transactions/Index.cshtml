@@ -26,8 +26,7 @@
 @foreach (var item in Model.Transactions) {
     <tr>
         <td>
-            @*@Html.DisplayFor(modelItem => item.Person.FirstName)*@
-            @item.Person.FullName
+            @Html.DisplayFor(modelItem => item.Person.FullName)            
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Ammount)
