@@ -108,6 +108,8 @@ namespace DebtGroup.Controllers
             OAuth2Parameters parameters = HttpContext.Application["GoogleAuthParams"] as OAuth2Parameters;
             parameters.AccessCode = token;
             OAuthUtil.GetAccessToken(parameters);
+
+            return View();
         }
 
 //        public ActionResult SheetApp(string token)
