@@ -12,21 +12,22 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Purchaser)
+            Purchaser
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Ammount)
+            Ammount
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            Description
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.Transactions) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Person.FullName.Where(p => item.Purchaser == item.Person.ID)))
+            @*@Html.DisplayFor(modelItem => item.Person.FirstName)*@
+            @item.Person.FullName
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Ammount)

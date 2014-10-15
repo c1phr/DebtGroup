@@ -17,14 +17,14 @@ namespace DebtGroup.Migrations
 
         protected override void Seed(DebtGroup.DAL.DebtGroupContext context)
         {
-            var people = new List<Person>
-            {
+            context.Persons.AddOrUpdate(
+
                 new Person {FirstName = "Ryan", LastName = "Batchelder"},
                 new Person {FirstName = "Cassie", LastName = "Badalamenti"},
                 new Person {FirstName = "Dustin", LastName = "Story"}
-            };
 
-            people.ForEach(s => context.Persons.AddOrUpdate(s));
+                );                      
+            //people.ForEach(s => context.Persons.AddOrUpdate());            
             context.SaveChanges();
         }
     }

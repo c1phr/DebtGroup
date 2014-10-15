@@ -189,6 +189,10 @@
     <Compile Include="Migrations\201410141650435_PurchaserID.Designer.cs">
       <DependentUpon>201410141650435_PurchaserID.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410151846032_FKPurchaser.cs" />
+    <Compile Include="Migrations\201410151846032_FKPurchaser.Designer.cs">
+      <DependentUpon>201410151846032_FKPurchaser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Person.cs" />
     <Compile Include="Models\Transaction.cs" />
@@ -269,6 +273,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410141650435_PurchaserID.resx">
       <DependentUpon>201410141650435_PurchaserID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410151846032_FKPurchaser.resx">
+      <DependentUpon>201410151846032_FKPurchaser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
