@@ -15,7 +15,7 @@ namespace DebtGroup.Models
         public int Purchaser { get; set; }
 
         [DataType(DataType.Currency)]
-        public decimal Ammount { get; set; }
+        public decimal Amount { get; set; }
 
         public string Description { get; set; }
         public int[] SplitWith { get; set; }
