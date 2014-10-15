@@ -103,6 +103,13 @@ namespace DebtGroup.Controllers
             return View();
         }
 
+        public ActionResult UserInfo(string token)
+        {
+            OAuth2Parameters parameters = HttpContext.Application["GoogleAuthParams"] as OAuth2Parameters;
+            parameters.AccessCode = token;
+            OAuthUtil.GetAccessToken(parameters);
+        }
+
 //        public ActionResult SheetApp(string token)
 //        {
 //            OAuth2Parameters parameters = HttpContext.Application ["GoogleAuthParams"] as OAuth2Parameters;

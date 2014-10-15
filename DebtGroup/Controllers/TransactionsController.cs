@@ -53,7 +53,7 @@ namespace DebtGroup.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Purchaser,Ammount,Description")] Transaction transaction)
+        public ActionResult Create([Bind(Include = "ID,Purchaser,Amount,Description")] Transaction transaction)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace DebtGroup.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Purchaser,Ammount,Description")] Transaction transaction)
+        public ActionResult Edit([Bind(Include = "ID,Purchaser,Amount,Description")] Transaction transaction)
         {
             if (ModelState.IsValid)
             {
