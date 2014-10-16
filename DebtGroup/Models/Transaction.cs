@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Web;
+using Newtonsoft.Json;
 
 namespace DebtGroup.Models
 {
@@ -20,6 +16,7 @@ namespace DebtGroup.Models
         public string Description { get; set; }
         public int[] SplitWith { get; set; }
         
+        [JsonIgnore]
         public virtual Person Person { get; set; }
     }
 }

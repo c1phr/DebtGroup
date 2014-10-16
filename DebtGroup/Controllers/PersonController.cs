@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using DebtGroup.DAL;
 using DebtGroup.Models;
+using Newtonsoft.Json;
 
 namespace DebtGroup.Controllers
 {
@@ -34,6 +35,20 @@ namespace DebtGroup.Controllers
                 return HttpNotFound();
             }
             return View(person);
+        }
+
+        public string GetPersonDetails(int? id)
+        {
+            if (id == null)
+            {
+                return null;
+            }
+            Person person = db.Persons.Find(id);
+            if (person == null)
+            {
+                return null;
+            }
+            return JsonConvert.SerializeObject(person);
         }
 
         // GET: Person/Create
