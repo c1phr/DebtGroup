@@ -1,7 +1,12 @@
-﻿@model DebtGroup.ViewModels.TransactionViewModel
+﻿@using System.Web.UI.WebControls
+@model DebtGroup.ViewModels.TransactionViewModel
 
 @{
     ViewBag.Title = "Index";
+   
+}
+@{
+    Layout = "../Shared/ngLayout.cshtml";
 }
 
 <h2>Index</h2>
@@ -9,37 +14,42 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table">
-    <tr>
-        <th>
-            Purchaser
-        </th>
-        <th>
-            Amount
-        </th>
-        <th>
-            Description
-        </th>
-        <th></th>
-    </tr>
+<div class="table-responsive">
+    <table class="table">
+        <tr>
+            <th>
+                Purchaser
+            </th>
+            <th>
+                Amount
+            </th>
+            <th>
+                Description
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model.Transactions) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Person.FullName)            
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Amount)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model.Transactions)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Person.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                </td>
+            </tr>
+        }
 
-</table>
+    </table>
+</div>
+<div ng-view></div>
+
