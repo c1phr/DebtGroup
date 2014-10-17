@@ -37,14 +37,15 @@ namespace DebtGroup.Controllers
             return View(person);
         }
 
-        public string GetPersonDetails(int? id)
+        public string GetPersonName(int? id)
         {
             if (id == null)
             {
                 return null;
             }
-            Person person = db.Persons.Find(id);
-            if (person == null)
+            //Person person = db.Persons.Find(id);
+            var person = (from a in db.Persons where a.ID == id select new {a.FirstName, a.LastName}).ToList();
+            if (person.Count == 0)
             {
                 return null;
             }
