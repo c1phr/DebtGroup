@@ -1,7 +1,5 @@
 ﻿html {
-    background-color: #e2e2e2;
-    margin: 0;
-    padding: 0;
+    background-color: #e2e2e2;    
 }
 
 body {
@@ -10,8 +8,13 @@ body {
     color: #333;
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
-    margin: 0;
-    padding: 0;
+    padding-top: 50px;    
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 a {
@@ -749,14 +752,4 @@ tr.pager td {
         footer p {
             margin: 0;
         }
-}
-
-
-
-.flex-container {
-    width: 100%;
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	align-items: center;
 }
