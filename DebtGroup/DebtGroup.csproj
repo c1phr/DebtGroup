@@ -229,6 +229,18 @@
     <Compile Include="Migrations\201410152005576_FixingSpellingMistake.Designer.cs">
       <DependentUpon>201410152005576_FixingSpellingMistake.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201410171950268_AddedTransactionDetails.cs" />
+    <Compile Include="Migrations\201410171950268_AddedTransactionDetails.Designer.cs">
+      <DependentUpon>201410171950268_AddedTransactionDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410172000041_RemovedTransactionDetails.cs" />
+    <Compile Include="Migrations\201410172000041_RemovedTransactionDetails.Designer.cs">
+      <DependentUpon>201410172000041_RemovedTransactionDetails.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201410172016199_ChangedSplitWith.cs" />
+    <Compile Include="Migrations\201410172016199_ChangedSplitWith.Designer.cs">
+      <DependentUpon>201410172016199_ChangedSplitWith.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -289,7 +301,6 @@
     <Content Include="Views\Web.config" />
     <Content Include="packages.config" />
     <None Include="readme.txt" />
-
     <Content Include="Content\bootstrap-theme.css" />
     <None Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -334,7 +345,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Transactions\Template\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201410141558186_InitialCreate.resx">
@@ -351,6 +361,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201410152005576_FixingSpellingMistake.resx">
       <DependentUpon>201410152005576_FixingSpellingMistake.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410171950268_AddedTransactionDetails.resx">
+      <DependentUpon>201410171950268_AddedTransactionDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410172000041_RemovedTransactionDetails.resx">
+      <DependentUpon>201410172000041_RemovedTransactionDetails.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201410172016199_ChangedSplitWith.resx">
+      <DependentUpon>201410172016199_ChangedSplitWith.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

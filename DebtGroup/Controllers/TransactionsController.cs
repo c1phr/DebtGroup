@@ -10,6 +10,7 @@ using DebtGroup.DAL;
 using DebtGroup.Models;
 using System.Data.Entity.Infrastructure;
 using DebtGroup.ViewModels;
+using Microsoft.Ajax.Utilities;
 using Newtonsoft.Json;
 
 namespace DebtGroup.Controllers
@@ -32,13 +33,18 @@ namespace DebtGroup.Controllers
         {
             if (id == null)
             {
-                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Transaction transaction = db.Transactions.Find(id);
+                return "Bad Request";
+            }           
+            var transaction = (from tran in db.Transactions
+                               where tran.ID == id
+                               join per in db.Persons on tran.Purchaser equals per.ID
+                               select new {tran.ID, tran.Amount, tran.Description, tran.SplitWith, per.FirstName, per.LastName}).SingleOrDefault();      
+            
             if (transaction == null)
-            {
-                //return HttpNotFound();
+            {                
+                return "Transaction not found";
             }            
+           
             return JsonConvert.SerializeObject(transaction);
         }
 

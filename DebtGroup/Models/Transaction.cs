@@ -14,9 +14,9 @@ namespace DebtGroup.Models
         public decimal Amount { get; set; }
 
         public string Description { get; set; }
-        public int[] SplitWith { get; set; }
+        public string SplitWith { get; set; }
         
         [JsonIgnore]
-        public virtual Person Person { get; set; }
+        public virtual Person Person { get; set; }        
     }
 }

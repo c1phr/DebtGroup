@@ -49,7 +49,7 @@ namespace DebtGroup.Controllers
             {
                 return null;
             }
-            return JsonConvert.SerializeObject(person);
+            return person.ToString();
         }
 
         // GET: Person/Create
