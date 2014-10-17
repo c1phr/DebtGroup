@@ -210,6 +210,10 @@
     <Content Include="Global.asax" />
     <Content Include="Google.config" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
+    <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
     <Content Include="Scripts\app.js" />
     <Content Include="Scripts\controllers\transCtrl.js" />
     <Content Include="Scripts\jquery-2.1.1.js" />

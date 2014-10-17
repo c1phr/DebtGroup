@@ -42,9 +42,10 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+                    <a>@Html.ActionLink("Edit", "Edit", new { id = item.ID })</a>  |
+                    <a data-toggle="modal" data-target="#tester" style="cursor:pointer;" ng-click="detailsData(@Html.Raw(item.ID))">Details</a>  |
+                    <a>@Html.ActionLink("Delete", "Delete", new { id = item.ID })</a>
+                    @*   *@
                 </td>
             </tr>
         }
