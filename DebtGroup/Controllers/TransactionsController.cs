@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -51,7 +52,7 @@ namespace DebtGroup.Controllers
         // GET: Transactions/Create
         public ActionResult Create()
         {
-            PopulatePersonsDropdown();
+            PopulatePurchaserDropdown();
             return View();
         }
 
@@ -84,7 +85,8 @@ namespace DebtGroup.Controllers
             {
                 return HttpNotFound();
             }
-            PopulatePersonsDropdown(transaction.Purchaser);            
+            PopulatePurchaserDropdown(transaction.Purchaser);        
+            PopulateSplitDropdown();
             return View(transaction);
         }
 
@@ -93,10 +95,12 @@ namespace DebtGroup.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Purchaser,Amount,Description")] Transaction transaction)
+        public ActionResult Edit([Bind(Include = "ID,Purchaser,Amount,Description,Persons")] Transaction transaction)
         {
             if (ModelState.IsValid)
             {
+                ModelState.SetModelValue("SplitWith", new ValueProviderResult(String.Join(",", ModelState["Persons"].ToString()), string.Empty, new CultureInfo("en-US")));
+                ModelState.Remove("Persons");
                 db.Entry(transaction).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -130,13 +134,22 @@ namespace DebtGroup.Controllers
             return RedirectToAction("Index");
         }
 
-        private void PopulatePersonsDropdown(object selectedPerson = null)
+        private void PopulatePurchaserDropdown(object selectedPerson = null)
         {
             var personQuery = from p in db.Persons  
                 orderby p.LastName
                 select p;
             ViewBag.Purchaser = new SelectList(personQuery, "ID", "FullName", selectedPerson);
         }
+
+        private void PopulateSplitDropdown(object selectedPerson = null)
+        {
+            var personQuery = from p in db.Persons
+                              orderby p.LastName
+                              select p;
+            ViewBag.Persons = new MultiSelectList(personQuery, "ID", "FullName");
+        }
+
 
         protected override void Dispose(bool disposing)
         {

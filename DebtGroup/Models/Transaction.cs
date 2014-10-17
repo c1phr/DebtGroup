@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Newtonsoft.Json;
 
@@ -15,6 +17,8 @@ namespace DebtGroup.Models
 
         public string Description { get; set; }
         public string SplitWith { get; set; }
+
+        public IEnumerable<Person> Persons { get; set; }
         
         [JsonIgnore]
         public virtual Person Person { get; set; }        
