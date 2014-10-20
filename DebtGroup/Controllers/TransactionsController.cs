@@ -74,19 +74,19 @@ namespace DebtGroup.Controllers
         }
 
         // GET: Transactions/Edit/5
-        public string Edit(int? id)
-        {
-            if (id == null)
-            {
-                return null;
-            }
-            Transaction transaction = db.Transactions.Find(id);
-            if (transaction == null)
-            {
-                return "Not found";
-            }                                         
-            return JsonConvert.SerializeObject(transaction);
-        }
+        //public string Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return null;
+        //    }
+        //    Transaction transaction = db.Transactions.Find(id);
+        //    if (transaction == null)
+        //    {
+        //        return "Not found";
+        //    }                                         
+        //    return JsonConvert.SerializeObject(transaction);
+        //}
 
         // POST: Transactions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
