@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using DebtGroup.DAL;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -16,6 +17,7 @@ namespace DebtGroup.Controllers
     public class AccountController : Controller
     {
         private ApplicationUserManager _userManager;
+        private DebtGroupContext db = new DebtGroupContext();
 
         public AccountController()
         {
@@ -156,6 +158,12 @@ namespace DebtGroup.Controllers
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
+                var userPerson = new Person();
+                userPerson.FirstName = model.FirstName;
+                userPerson.LastName = model.LastName;
+                db.Persons.Add(userPerson);
+                db.SaveChanges();
+
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
