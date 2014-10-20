@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Web.Mvc;
 using Newtonsoft.Json;
 
 namespace DebtGroup.Models
@@ -9,6 +10,7 @@ namespace DebtGroup.Models
     public class Transaction
     {
         public int ID { get; set; }
+
         [ForeignKey("Person")]
         public int Purchaser { get; set; }
 
@@ -18,7 +20,7 @@ namespace DebtGroup.Models
         public string Description { get; set; }
         public string SplitWith { get; set; }
 
-        public IEnumerable<Person> Persons { get; set; }
+        public IEnumerable<SelectListItem> Persons { get; set; }
         
         [JsonIgnore]
         public virtual Person Person { get; set; }        

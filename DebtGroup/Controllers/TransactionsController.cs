@@ -74,38 +74,45 @@ namespace DebtGroup.Controllers
         }
 
         // GET: Transactions/Edit/5
-        public ActionResult Edit(int? id)
+        public string Edit(int? id)
         {
             if (id == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return null;
             }
             Transaction transaction = db.Transactions.Find(id);
             if (transaction == null)
             {
-                return HttpNotFound();
-            }
-            PopulatePurchaserDropdown(transaction.Purchaser);        
-            PopulateSplitDropdown();
-            return View(transaction);
+                return "Not found";
+            }                                         
+            return JsonConvert.SerializeObject(transaction);
         }
 
         // POST: Transactions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Purchaser,Amount,Description,Persons")] Transaction transaction)
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "ID,Purchaser,Amount,Description,Persons")] Transaction transaction)
+        public JsonResult Edit(Transaction trans)
         {
-            if (ModelState.IsValid)
-            {
-                ModelState.SetModelValue("SplitWith", new ValueProviderResult(String.Join(",", ModelState["Persons"].ToString()), string.Empty, new CultureInfo("en-US")));
-                ModelState.Remove("Persons");
-                db.Entry(transaction).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(transaction);
+            db.Entry(trans).State = EntityState.Modified;
+            db.SaveChanges();
+            //if (ModelState.IsValid)
+            //{
+            //    ModelState.SetModelValue("SplitWith", new ValueProviderResult(String.Join(",", ModelState["Persons"].ToString()), string.Empty, new CultureInfo("en-US")));
+            //    transaction.Persons = db.Persons.ToList().Select(x => new SelectListItem
+            //    {
+            //        Text = x.FullName,
+            //        Value = x.ID.ToString()
+            //    });
+            //    ModelState.Remove("Persons");
+            //    db.Entry(transaction).State = EntityState.Modified;
+            //    db.SaveChanges();
+            //    return RedirectToAction("Index");
+            //}
+            //return View(transaction);
+            return Json("Updated");
         }
 
         // GET: Transactions/Delete/5
