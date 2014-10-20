@@ -6,6 +6,7 @@ using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 using DebtGroup.DAL;
 using DebtGroup.Models;
@@ -59,12 +60,12 @@ namespace DebtGroup.Controllers
         // POST: Transactions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "ID,Purchaser,Amount,Description")] Transaction transaction)
         {
             if (ModelState.IsValid)
-            {
+            {                
                 db.Transactions.Add(transaction);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -91,10 +92,10 @@ namespace DebtGroup.Controllers
         // POST: Transactions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [System.Web.Mvc.HttpPost]
         //[ValidateAntiForgeryToken]
         //public ActionResult Edit([Bind(Include = "ID,Purchaser,Amount,Description,Persons")] Transaction transaction)
-        public JsonResult Edit(Transaction trans)
+        public JsonResult Edit([FromBody]Transaction trans)
         {
             db.Entry(trans).State = EntityState.Modified;
             db.SaveChanges();
@@ -131,7 +132,7 @@ namespace DebtGroup.Controllers
         }
 
         // POST: Transactions/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [System.Web.Mvc.HttpPost, System.Web.Mvc.ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
