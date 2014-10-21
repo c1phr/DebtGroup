@@ -8,6 +8,7 @@ using Google.GData.Client;
 
 namespace DebtGroup.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         public ActionResult Index()
