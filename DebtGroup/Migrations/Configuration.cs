@@ -17,7 +17,7 @@ namespace DebtGroup.Migrations
 
         protected override void Seed(DebtGroup.DAL.DebtGroupContext context)
         {
-            context.Persons.AddOrUpdate(
+            context.Persons.AddOrUpdate(p => p.LastName,
 
                 new Person {FirstName = "Ryan", LastName = "Batchelder"},
                 new Person {FirstName = "Cassie", LastName = "Badalamenti"},

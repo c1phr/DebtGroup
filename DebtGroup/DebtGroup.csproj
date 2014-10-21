@@ -253,7 +253,7 @@
     <Compile Include="ViewModels\TransactionViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App_Start\Content\SCSS\Site.scss" />
+    <None Include="Content\SCSS\Site.scss" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Google.config" />
@@ -278,7 +278,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="App_Start\Content\Site.css" />
+    <Content Include="Content\Site.css" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
