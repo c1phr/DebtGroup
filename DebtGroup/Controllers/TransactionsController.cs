@@ -60,18 +60,30 @@ namespace DebtGroup.Controllers
         // POST: Transactions/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [System.Web.Mvc.HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Purchaser,Amount,Description")] Transaction transaction)
-        {
-            if (ModelState.IsValid)
-            {                
-                db.Transactions.Add(transaction);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+        //[System.Web.Mvc.HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "ID,Purchaser,Amount,Description")] Transaction transaction)
+        //{
+        //    if (ModelState.IsValid)
+        //    {                
+        //        db.Transactions.Add(transaction);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-            return View(transaction);
+        //    return View(transaction);
+        //}
+
+        [System.Web.Mvc.HttpPost]
+        public JsonResult Create([FromBody] Transaction trans)
+        {
+            if (trans.Amount > 0 && !string.IsNullOrEmpty(trans.Description) && trans.Purchaser != 0 && !string.IsNullOrEmpty(trans.SplitWith))
+            {
+                db.Transactions.Add(trans);
+                db.SaveChanges();
+                return Json("Transaction added");
+            }
+            return Json("Error adding transaction");
         }
 
         // GET: Transactions/Edit/5
