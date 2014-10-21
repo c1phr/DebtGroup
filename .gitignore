@@ -6,6 +6,7 @@
 *.user
 *.sln.docstates
 [Pp]ackages/
+*.userprefs
 
 # Build results
 
