@@ -24,7 +24,7 @@ namespace DebtGroup.Controllers
         public ActionResult Index()
         {
             var viewModel = new TransactionViewModel();
-            viewModel.Transactions = db.Transactions.Include(i => i.Purchaser);
+            viewModel.Transactions = db.Transactions.Include(i => i.PurchaserID);
             viewModel.Persons = db.Persons;
             return View(viewModel);
         }
