@@ -21,12 +21,24 @@ namespace DebtGroup.Controllers
     {
         private DebtGroupContext db = new DebtGroupContext();
 
+        public ActionResult Index()
+        {
+            var viewModel = new TransactionViewModel();
+            viewModel.Transactions = db.Transactions.Include(i => i.Purchaser);
+            viewModel.Persons = db.Persons;
+            return View(viewModel);
+        }
+
+
         // GET: Transactions
-        public JsonResult Index()
+        public JsonResult TransactionList()
         {
             var viewModel = new TransactionViewModel();
             var transactions = db.Transactions.GroupBy(t => t.TransactionID);
-            
+            foreach (var transaction in transactions)
+            {
+                
+            }
             //viewModel.Persons = db.Persons;
             return Json(viewModel, JsonRequestBehavior.AllowGet);
         }
