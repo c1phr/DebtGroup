@@ -44,12 +44,9 @@ namespace DebtGroup.Controllers
                 return null;
             }
             //Person person = db.Persons.Find(id);
-            var person = (from a in db.Persons where a.ID == id select new {a.FirstName, a.LastName}).ToList();
-            if (person.Count == 0)
-            {
-                return null;
-            }
-            return person.ToString();
+            var person = (from a in db.Persons where a.ID == id select new {a.FirstName, a.LastName});
+                        
+            return JsonConvert.SerializeObject(person);
         }
 
         // GET: Person/Create
