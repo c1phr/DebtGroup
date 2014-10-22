@@ -75,11 +75,20 @@ namespace DebtGroup.Controllers
         //}
 
         [System.Web.Mvc.HttpPost]
-        public JsonResult Create([FromBody] Transaction trans)
+        public JsonResult Create([FromBody] TransactionRestModel restTrans)
         {
-            if (trans.Amount > 0 && !string.IsNullOrEmpty(trans.Description) && trans.Purchaser != 0)
+            if (restTrans.Amount > 0 && !string.IsNullOrEmpty(restTrans.Description) && restTrans.Purchaser != 0 && restTrans.SplitWith.Length > 0)
             {
-                db.Transactions.Add(trans);
+                foreach (var splitID in restTrans.SplitWith)
+                {
+                    var trans = new Transaction();
+                    trans.Amount = restTrans.Amount;
+                    trans.Purchaser = restTrans.Purchaser;
+                    trans.Description = restTrans.Description;
+                    trans.SplitWith = splitID;
+                    db.Transactions.Add(trans);
+                }
+
                 try
                 {
                     db.SaveChanges();
@@ -87,7 +96,7 @@ namespace DebtGroup.Controllers
                 catch (Exception ex)
                 {
                     return Json(ex);
-                }                
+                }
                 return Json("Transaction added");
             }
             return Json("You forgot a field");
