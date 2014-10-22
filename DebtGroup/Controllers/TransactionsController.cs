@@ -25,7 +25,7 @@ namespace DebtGroup.Controllers
         public ActionResult Index()
         {
             var viewModel = new TransactionViewModel();
-            viewModel.Transactions = db.Transactions.Include(i => i.Person);
+            viewModel.Transactions = db.Transactions.Include(i => i.Purchaser);
             viewModel.Persons = db.Persons;
             return View(viewModel);
         }
@@ -77,13 +77,20 @@ namespace DebtGroup.Controllers
         [System.Web.Mvc.HttpPost]
         public JsonResult Create([FromBody] Transaction trans)
         {
-            if (trans.Amount > 0 && !string.IsNullOrEmpty(trans.Description) && trans.Purchaser != 0 && !string.IsNullOrEmpty(trans.SplitWith))
+            if (trans.Amount > 0 && !string.IsNullOrEmpty(trans.Description) && trans.Purchaser != 0)
             {
                 db.Transactions.Add(trans);
-                db.SaveChanges();
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return Json(ex);
+                }                
                 return Json("Transaction added");
             }
-            return Json("Error adding transaction");
+            return Json("You forgot a field");
         }
 
         // GET: Transactions/Edit/5
@@ -109,22 +116,11 @@ namespace DebtGroup.Controllers
         //public ActionResult Edit([Bind(Include = "ID,Purchaser,Amount,Description,Persons")] Transaction transaction)
         public JsonResult Edit([FromBody]Transaction trans)
         {
-            db.Entry(trans).State = EntityState.Modified;
-            db.SaveChanges();
-            //if (ModelState.IsValid)
-            //{
-            //    ModelState.SetModelValue("SplitWith", new ValueProviderResult(String.Join(",", ModelState["Persons"].ToString()), string.Empty, new CultureInfo("en-US")));
-            //    transaction.Persons = db.Persons.ToList().Select(x => new SelectListItem
-            //    {
-            //        Text = x.FullName,
-            //        Value = x.ID.ToString()
-            //    });
-            //    ModelState.Remove("Persons");
-            //    db.Entry(transaction).State = EntityState.Modified;
-            //    db.SaveChanges();
-            //    return RedirectToAction("Index");
-            //}
-            //return View(transaction);
+            if (trans.Amount > 0 && !string.IsNullOrEmpty(trans.Description) && trans.Purchaser != 0)
+            {
+                db.Entry(trans).State = EntityState.Modified;
+                db.SaveChanges();
+            }
             return Json("Updated");
         }
 
