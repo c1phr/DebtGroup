@@ -1,4 +1,17 @@
 ﻿<!-- Modal -->
+<style>
+    .modal-title {
+        text-align: center;
+    }
+    .modal-header {
+         background: #A6A6A6;
+        color: white;
+    }
+    /*.disabled {
+        background: #C8C8C8;
+    }*/
+
+</style>
 <div class="modal fade" id="tester" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -7,11 +20,39 @@
                 <h4 class="modal-title" id="myModalLabel">Transaction Details</h4>
             </div>
             <div class="modal-body">
-                <div ng-repeat="data in newDetails">
-                    <h4>Purchaser: {{data.FirstName}} {{data.LastName}}</h4> 
-                    <h4>Amount: {{data.Amount}}</h4> 
-                    <h4>Description: {{data.Description}}</h4> 
-                    <h4>Split With: {{data.SplitWith}}</h4>
+                <div class="row text-center">
+                    <div class="btn-group">
+                        <button type="button" ng-click="editDetails()" class="btn btn-primary editButton" style="color:white; border-radius:0;">Edit Details</button>
+                        <button type="button" ng-click="saveChanges()" class="hide btn btn-primary saveChanges" style="color:white; border-radius:0;">Save Changes</button>
+                        <button type="button" ng-click="cancelChanges()" class="hide btn btn-default cancelButton" style="border-radius:0;">Cancel</button>                   
+                    </div>
+                </div>
+                <div class="row" ng-repeat="data in newDetails" style="margin-top:10px;">
+                    <div class="col-sm-3" >
+                        <label>Purchaser:</label>
+                    </div>
+                    <div class="col-sm-6 col-sm-offset-3 col-sm-pull-3" style="margin-bottom:10px;">
+                        <input type="text" class="form-control editInput dataPurchaser" readonly="readonly" value="{{data.FirstName}} {{data.LastName}}" />
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Amount:</label>
+                    </div>
+                    <div class="col-sm-6 col-sm-offset-3 col-sm-pull-3" style="margin-bottom:10px;">
+                        <input type="number" class="form-control editInput dataAmount" min="1" readonly="readonly" value="{{data.Amount}}" />
+
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Description:</label>
+                    </div>
+                    <div class="col-sm-6 col-sm-offset-3 col-sm-pull-3" style="margin-bottom:10px;">
+                        <input type="text" class="form-control editInput dataDescr" readonly="readonly" value="{{data.Description}}" />
+                    </div>
+                    <div class="col-sm-3">
+                        <label>Split With:</label>
+                    </div>
+                    <div class="col-sm-6 col-sm-offset-3 col-sm-pull-3" style="margin-bottom:10px;">
+                        <input type="text" class="form-control editInput dataSplit" readonly="readonly" value="{{data.SplitWith}}" />
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">
