@@ -22,12 +22,13 @@ namespace DebtGroup.Controllers
         private DebtGroupContext db = new DebtGroupContext();
 
         // GET: Transactions
-        public ActionResult Index()
+        public JsonResult Index()
         {
             var viewModel = new TransactionViewModel();
-            viewModel.Transactions = db.Transactions.Include(i => i.Purchaser);
-            viewModel.Persons = db.Persons;
-            return View(viewModel);
+            var transactions = db.Transactions.GroupBy(t => t.TransactionID);
+            
+            //viewModel.Persons = db.Persons;
+            return Json(viewModel, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Transactions/Details/5
@@ -77,26 +78,47 @@ namespace DebtGroup.Controllers
         [System.Web.Mvc.HttpPost]
         public JsonResult Create([FromBody] TransactionRestModel restTrans)
         {
+            int newId;
+            try
+            {
+                newId = db.Transactions.Max(t => t.TransactionID) + 1;
+            }
+            catch (Exception)
+            {
+                newId = 0;                
+            }
             if (restTrans.Amount > 0 && !string.IsNullOrEmpty(restTrans.Description) && restTrans.Purchaser != 0 && restTrans.SplitWith.Length > 0)
             {
                 foreach (var splitID in restTrans.SplitWith)
                 {
-                    var trans = new Transaction();
-                    trans.Amount = restTrans.Amount;
-                    trans.Purchaser = restTrans.Purchaser;
-                    trans.Description = restTrans.Description;
-                    trans.SplitWith = splitID;
-                    db.Transactions.Add(trans);
+                    //var trans = new Transaction
+                    //{
+                    //    ID = newId,
+                    //    Amount = restTrans.Amount,
+                    //    Purchaser = restTrans.Purchaser,
+                    //    Description = restTrans.Description,
+                    //    SplitWith = splitID
+                    //};
+                    db.Transactions.Add(
+                        new Transaction
+                    {
+                        TransactionID = newId,
+                        Amount = restTrans.Amount,
+                        Purchaser = restTrans.Purchaser,
+                        Description = restTrans.Description,
+                        SplitWith = splitID
+                    });
+
+                    try
+                    {
+                        db.SaveChanges();
+                    }
+                    catch (Exception ex)
+                    {
+                        return Json(ex);
+                    }
                 }
 
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-                    return Json(ex);
-                }
                 return Json("Transaction added");
             }
             return Json("You forgot a field");
@@ -123,14 +145,33 @@ namespace DebtGroup.Controllers
         [System.Web.Mvc.HttpPost]
         //[ValidateAntiForgeryToken]
         //public ActionResult Edit([Bind(Include = "ID,Purchaser,Amount,Description,Persons")] Transaction transaction)
-        public JsonResult Edit([FromBody]Transaction trans)
+        public JsonResult Edit([FromBody]TransactionRestModel restTrans)
         {
-            if (trans.Amount > 0 && !string.IsNullOrEmpty(trans.Description) && trans.Purchaser != 0)
+            if (restTrans.Amount > 0 && !string.IsNullOrEmpty(restTrans.Description) && restTrans.Purchaser != 0 && restTrans.SplitWith.Length > 0)
             {
-                db.Entry(trans).State = EntityState.Modified;
-                db.SaveChanges();
+                foreach (var splitID in restTrans.SplitWith)
+                {
+                    var trans = new Transaction
+                    {
+                        Amount = restTrans.Amount,
+                        Purchaser = restTrans.Purchaser,
+                        Description = restTrans.Description,
+                        SplitWith = splitID
+                    };
+                    db.Entry(trans).State = EntityState.Modified;
+                }
+
+                try
+                {
+                    db.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    return Json(ex);
+                }
+                return Json("Transaction added");
             }
-            return Json("Updated");
+            return Json("You forgot a field");
         }
 
         // GET: Transactions/Delete/5

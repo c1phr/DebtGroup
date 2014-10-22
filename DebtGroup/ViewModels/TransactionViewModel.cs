@@ -9,6 +9,6 @@ namespace DebtGroup.ViewModels
     public class TransactionViewModel
     {
         public IEnumerable<Person> Persons { get; set; }
-        public IEnumerable<Transaction> Transactions { get; set; } 
+        public IEnumerable<TransactionRestModel> Transactions { get; set; } 
     }
 }

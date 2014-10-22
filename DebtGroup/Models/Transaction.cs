@@ -12,7 +12,8 @@ namespace DebtGroup.Models
         [Key, Column(Order = 0)]
         public int ID { get; set; }
         
-        [Key, Column(Order = 1)]
+        public int TransactionID { get; set; }
+                
         public int Purchaser { get; set; }
 
         [ForeignKey("Purchaser")]
@@ -22,8 +23,7 @@ namespace DebtGroup.Models
         public decimal Amount { get; set; }
 
         public string Description { get; set; }
-        
-        [Key, Column(Order = 2)]
+                
         public int SplitWith { get; set; }
 
         [ForeignKey("SplitWith")]
