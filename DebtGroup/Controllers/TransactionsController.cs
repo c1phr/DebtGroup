@@ -31,17 +31,38 @@ namespace DebtGroup.Controllers
 
 
         // GET: Transactions
-        public JsonResult TransactionList()
+        public string TransactionList()
         {
             var viewModel = new TransactionViewModel();
-            var transactions = db.Transactions.GroupBy(t => t.TransactionID);
+            var transactions = db.Transactions;
+            var transactionAggregate = new Dictionary<int, TransactionIndexModel>();
             foreach (var transaction in transactions)
             {
-                
+                //var nameList = (from per in db.Persons
+                //            where per.ID == transaction.SplitWith
+                //            select new { per.FirstName, per.LastName }).ToList();         
+                Person splitPerson = db.Persons.Find(transaction.SplitWith);
+                Person purchaserPerson = db.Persons.Find(transaction.Purchaser);
+                string name = splitPerson.FullName;
+                if (transactionAggregate.ContainsKey(transaction.TransactionID))
+                {                    
+                    transactionAggregate[transaction.TransactionID].SplitWith = ArrayAppend(transactionAggregate[transaction.TransactionID].SplitWith, name);
+                }
+                else
+                {
+                    transactionAggregate.Add(transaction.TransactionID, new TransactionIndexModel
+                    {
+                        Amount = transaction.Amount,
+                        Description = transaction.Description,
+                        Purchaser = purchaserPerson.FullName,
+                        SplitWith = new []{name}
+                    });
+                }
             }
             //viewModel.Persons = db.Persons;
-            return Json(viewModel, JsonRequestBehavior.AllowGet);
+            return JsonConvert.SerializeObject(transactionAggregate);
         }
+        
 
         // GET: Transactions/Details/5
         public string Details(int? id)
@@ -228,6 +249,22 @@ namespace DebtGroup.Controllers
             ViewBag.Persons = new MultiSelectList(personQuery, "ID", "FullName");
         }
 
+        private T[] ArrayAppend<T>(T[] src, T elem)
+        {
+            var toRet = new T[src.Count() + 1];
+            for (int i = 0; i < toRet.Count(); i++)
+            {
+                if (i < src.Count())
+                {
+                    toRet[i] = src[i];
+                }
+                else
+                {
+                    toRet[i] = elem;
+                }
+            }
+            return toRet;
+        }
 
         protected override void Dispose(bool disposing)
         {

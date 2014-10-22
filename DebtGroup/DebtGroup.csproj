@@ -262,6 +262,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\HtmlExtensions.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\TransactionIndexModel.cs" />
     <Compile Include="ViewModels\TransactionRestModel.cs" />
     <Compile Include="ViewModels\TransactionViewModel.cs" />
   </ItemGroup>
