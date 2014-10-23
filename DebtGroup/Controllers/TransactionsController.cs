@@ -175,6 +175,7 @@ namespace DebtGroup.Controllers
         // POST: Transactions/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+
         [System.Web.Mvc.HttpPost]
         //[ValidateAntiForgeryToken]
         //public ActionResult Edit([Bind(Include = "ID,Purchaser,Amount,Description,Persons")] Transaction transaction)
@@ -208,29 +209,30 @@ namespace DebtGroup.Controllers
         }
 
         // GET: Transactions/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Transaction transaction = db.Transactions.Find(id);
-            if (transaction == null)
-            {
-                return HttpNotFound();
-            }
-            return View(transaction);
-        }
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Transaction transaction = db.Transactions.Find(id);
+        //    if (transaction == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(transaction);
+        //}
 
         // POST: Transactions/Delete/5
-        [System.Web.Mvc.HttpPost, System.Web.Mvc.ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+
+        [System.Web.Mvc.HttpPost]
+        //[ValidateAntiForgeryToken]
+        public JsonResult Delete(int id)
         {
             Transaction transaction = db.Transactions.Find(id);
             db.Transactions.Remove(transaction);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json("Delete confirmed");
         }
 
         private void PopulatePurchaserDropdown(object selectedPerson = null)
